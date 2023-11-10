@@ -15,6 +15,7 @@
             background: url('./Background.png') no-repeat center center fixed;
             background-size: cover;
             color: #ddd;
+
         }
 
         .navbar {
@@ -44,35 +45,20 @@
         .main {
             padding: 60px 10%;
             margin-top: 50px;
-        }
-
-        .btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #0d6efd;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 20px;
-            text-decoration: none;
-            z-index: 1001;
-            /* Make sure the button is above other content */
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #0b5ed7;
+            height: 95vh;
+            justify-content: space-between;
         }
 
         .section {
-            background-color: rgba(52, 64, 58, 0.9);
+            display: none;
+            background-color: rgba(93, 97, 95, 0.9);
             padding: 20px;
             border-radius: 5px;
             margin-bottom: 30px;
+        }
+
+        .active {
+            display: block;
         }
 
         .profile-pic {
@@ -85,7 +71,7 @@
         }
 
         .about-section {
-            display: flex;
+            display: block;
             align-items: center;
             justify-content: start;
         }
@@ -107,14 +93,16 @@
 <body>
 
     <div class="navbar">
+        <!-- 现在不需要在这里调用 showSection 函数了 -->
         <a href="#about">关于我</a>
         <a href="#education">教育背景</a>
         <a href="#experience">工作经历</a>
         <a href="#skills">技能专长</a>
         <a href="#contact">联系方式</a>
+        <a href="#about">了解更多</a>
     </div>
 
-    <a href="#about" class="btn">了解更多</a>
+
 
     <div class="main">
         <section id="about" class="section about-section">
@@ -153,6 +141,33 @@
             <p>LinkedIn：linkedin.com/in/yourprofile</p>
         </section>
     </div>
+
+    <script>
+        // 现在这个函数仅用于展示被点击的部分
+        function showSection(sectionId) {
+            // 隐藏所有除了关于我之外的sections
+            var sections = document.querySelectorAll('.section:not(#about)');
+            sections.forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            // 显示请求的section，除非它是关于我
+            if (sectionId !== 'about') {
+                var activeSection = document.getElementById(sectionId);
+                activeSection.style.display = 'block';
+            }
+        }
+
+        // 用于初始化页面，确保所有链接都绑定了正确的事件
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', function () {
+                var sectionId = this.getAttribute('href').slice(1);
+                showSection(sectionId);
+            });
+        });
+        // Select the 'about' section on initial load
+        showSection('about');
+    </script>
 
 </body>
 
