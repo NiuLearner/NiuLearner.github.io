@@ -42,10 +42,8 @@
         }
 
         .main {
-            padding: 16px;
+            padding: 60px 10%;
             margin-top: 50px;
-            height: 1500px;
-            /* Used in this example to enable scrolling */
         }
 
         .btn {
@@ -55,42 +53,53 @@
             transform: translate(-50%, -50%);
             background-color: #0d6efd;
             color: white;
-            padding: 16px 32px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 24px;
+            font-size: 20px;
             text-decoration: none;
-            border: 3px solid #2b2b2b;
-            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
-            transition: all 0.3s;
             z-index: 1001;
             /* Make sure the button is above other content */
+            transition: background-color 0.3s ease;
         }
 
         .btn:hover {
             background-color: #0b5ed7;
-            box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.75);
-        }
-
-        .btn:active {
-            background-color: #0a58ca;
-            box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.75);
         }
 
         .section {
-            background-color: rgba(52, 58, 64, 0.8);
-            border-radius: 15px;
+            background-color: rgba(52, 58, 64, 0.9);
             padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            /* or your preferred width */
+            height: auto;
+            border-radius: 50%;
+            /* circular image */
+            margin-right: 20px;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            justify-content: start;
         }
 
         .section h2 {
-            color: #fff;
+            color: #49a6e9;
+            margin-top: 0;
         }
 
         .section p {
-            color: #bbb;
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -105,10 +114,11 @@
         <a href="#contact">联系方式</a>
     </div>
 
-    <a href="#about" class="btn">点击了解更多</a>
+    <a href="#about" class="btn">了解更多</a>
 
     <div class="main">
-        <section id="about" class="section">
+        <section id="about" class="section about-section">
+            <img src="./photon.jpg" alt="个人照片" class="profile-pic">
             <h2>关于我</h2>
             <p>昵称：QR</p>
             <p>我是一位对数据有着深厚兴趣的量化研究员，专注于金融市场的二级市场研究。我精通Python和R语言编程，经常应用数学统计、机器学习和深度学习的相关知识。</p>
