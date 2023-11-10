@@ -1,107 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人简历</title>
     <style>
-        body {
+        body,
+        html {
+            height: 100%;
+            margin: 0;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
         }
 
-        .container {
-            width: 80%;
-            margin: auto;
+        .bg {
+            /* The image used */
+            background-image: url('./Background.png');
+
+            /* Full height */
+            height: 50%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .navbar {
             overflow: hidden;
+            background-color: #333;
         }
 
-        header {
-            background: #50b3a2;
-            color: white;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #e8491d 3px solid;
-        }
-
-        header a {
-            color: #ffffff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-
-        header ul {
-            padding: 0;
-            list-style: none;
-            text-align: center;
-        }
-
-        header li {
-            display: inline;
-            margin: 0 20px 0 20px;
-        }
-
-        header #branding {
+        .navbar a {
             float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
 
-        header #branding h1 {
-            margin: 0;
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
         }
 
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-
-        header .highlight,
-        header .current a {
-            color: #e8491d;
-            font-weight: bold;
-        }
-
-        header a:hover {
-            color: #ffffff;
-            font-weight: bold;
+        .main {
+            padding: 16px;
+            margin-top: 30px;
+            height: 1500px;
+            /* Used in this example to enable scrolling */
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">我的</span> 简历</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li class="current"><a href="#about">关于我</a></li>
-                    <li><a href="#education">教育背景</a></li>
-                    <li><a href="#experience">工作经历</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <div class="container">
+    <div class="bg"></div>
+
+    <div class="navbar">
+        <a href="#about">关于我</a>
+        <a href="#education">教育背景</a>
+        <a href="#experience">工作经历</a>
+    </div>
+
+    <div class="main">
         <section id="about">
             <h1>昵称</h1>
-            <p>憨憨冲</p>
+            <p>这里是您的昵称。</p>
         </section>
 
         <section id="education">
             <h1>教育背景</h1>
-            <p>脚痛大学 英勇铜鸡</p>
+            <p>这里是您的学校和专业信息。</p>
         </section>
 
         <section id="experience">
             <h1>工作经历</h1>
-            <p>小学鸡quant</p>
+            <p>这里是您的工作经历，包括任职的机构和职位。</p>
         </section>
     </div>
+
 </body>
 
 </html>
