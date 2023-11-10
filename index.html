@@ -4,169 +4,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简历 - QR</title>
-    <link rel="icon" href="./icon.png" type="image/x-icon">
+    <title>个人经历</title>
     <style>
         body,
         html {
             height: 100%;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: url('./Background.png') no-repeat center center fixed;
-            background-size: cover;
-            color: #ddd;
-
+            font-family: 'Roboto', 'Arial', sans-serif;
+            background-color: #fdfdf5;
+            /* 白色背景 */
+            color: #333;
+            text-rendering: optimizeLegibility;
         }
 
         .navbar {
+            background-color: #deb754;
+            /* 导航栏背景色 */
             overflow: hidden;
-            background-color: #333;
             position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .navbar a:hover {
-            background: #ddd;
-            color: black;
-        }
-
-        .main {
-            padding: 60px 10%;
-            margin-top: 50px;
-            height: 95vh;
+            z-index: 9999;
+            top: 30px;
+            /* 与顶部的距离 */
+            left: 50%;
+            /* 水平居中 */
+            transform: translateX(-50%);
+            display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            /* 减少内边距 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            /* 阴影效果 */
+            border-radius: 20px;
+            /* 圆角效果 */
+            width: calc(100% - 60px);
+            /* 计算宽度，减去一定的内边距 */
+        }
+
+        /* 导航链接样式 */
+        .navbar a,
+        .search-box button {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            background: none;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 搜索框样式 */
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input[type="text"] {
+            width: 200px;
+            /* 搜索框宽度 */
+            padding: 10px;
+            margin-right: 10px;
+            /* 与搜索按钮的间隔 */
+            border-radius: 20px;
+            border: 1px solid #bfa564;
+            /* 圆角输入框 */
+        }
+
+        /* 主要内容样式 */
+        .main-content {
+            padding-top: 100px;
+            /* 可能需要根据实际导航栏高度增加此值 */
+            padding-bottom: 20px;
+            padding-left: 30px;
+            /* 根据导航栏左右内边距调整 */
+            padding-right: 30px;
         }
 
         .section {
-            display: none;
-            background-color: rgba(93, 97, 95, 0.9);
-            padding: 20px;
-            border-radius: 5px;
+            background-color: #ffffff;
+            /* 白色卡片背景 */
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
             margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 8px;
+            /* 渐变效果 */
         }
 
-        .active {
+        .section#about {
             display: block;
+            /* 始终显示“关于我”部分 */
+            opacity: 1;
+        }
+
+        .section.active {
+            display: block;
+            /* 显示活动section */
+            opacity: 1;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
         }
 
         .profile-pic {
             width: 200px;
-            /* or your preferred width */
             height: auto;
             border-radius: 50%;
-            /* circular image */
             margin-right: 20px;
         }
 
-        .about-section {
-            display: block;
-            align-items: center;
-            justify-content: start;
-        }
-
         .section h2 {
-            color: #49a6e9;
+            color: #1a73e8;
+            /* 蓝色调 */
             margin-top: 0;
         }
 
         .section p {
-            color: #ccc;
+            color: #5f6368;
+            /* 深灰色调 */
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 10px;
+        }
+
+        h2:hover,
+        h3:hover {
+            background-color: #f0f0f0;
+            /* 设置鼠标悬停时的背景颜色 */
+            cursor: pointer;
+            /* 将鼠标指针改为手指形状 */
+        }
+
+        /* 鼠标悬停在列表项上时的样式 */
+        li:hover {
+            color: #1a73e8;
+            /* 设置鼠标悬停时的文字颜色 */
+            cursor: pointer;
+            /* 将鼠标指针改为手指形状 */
+        }
+
+        .navbar a:hover,
+        .navbar button:hover {
+            background-color: #bfa564;
+            /* 深一点的黄褐色 */
         }
     </style>
 </head>
 
 <body>
-
     <div class="navbar">
-        <!-- 现在不需要在这里调用 showSection 函数了 -->
-        <a href="#about">关于我</a>
-        <a href="#education">教育背景</a>
-        <a href="#experience">工作经历</a>
-        <a href="#skills">技能专长</a>
-        <a href="#contact">联系方式</a>
-        <a href="#about">了解更多</a>
+        <!-- 左侧导航链接 -->
+        <div>
+            <a href="#about">关于我</a>
+            <a href="#education">教育背景</a>
+            <a href="#experience">实习工作经历</a>
+            <a href="#projects">项目经验</a>
+            <a href="#skills">技能和证书</a>
+            <a href="#languages">语言能力</a>
+        </div>
+        <!-- 搜索框 -->
+        <div class="search-box">
+            <input type="text" placeholder="搜索..." name="search">
+            <button type="submit">搜索</button>
+        </div>
+
     </div>
 
-
-
-    <div class="main">
-        <section id="about" class="section about-section">
-            <img src="./photon.jpg" alt="个人照片" class="profile-pic">
+    <div class="main-content">
+        <section class="section" id="about">
+            <img alt="个人照片" class="profile-pic" src="./photon.jpg" />
             <div>
                 <h2>关于我</h2>
-                <p>昵称：QR</p>
-                <p>我是一位对数据有着深厚兴趣的量化研究员，专注于金融市场的二级市场研究。我精通Python和R语言编程，经常应用数学统计、机器学习和深度学习的相关知识。</p>
+                <p>昵称：憨憨冲</p>
+                <p>作为一名应用统计硕士，我在金融数据分析和量化研究方面拥有丰富的实习经验。我对数据挖掘和机器学习充满热情，并已在多家知名金融机构证明了我的能力。</p>
             </div>
         </section>
-
-        <section id="education" class="section">
+        <section class="section" id="education">
             <h2>教育背景</h2>
-            <p>学校：未来科技大学</p>
-            <p>专业：计算机科学与技术</p>
+            <p><strong>上海交通大学</strong> - 应用统计硕士, 数学科学学院 (2021年9月 - 2023年6月)</p>
+            <ul>
+                <li>GPA: 3.7/4.0</li>
+                <li>主要课程：数据挖掘、数学金融、统计学习、深度学习、应用时间序列、统计软件和算法（R）</li>
+            </ul>
+            <p><strong>西南财经大学</strong> - 经济统计学学士, 统计学院 (2017年9月 - 2021年6月)</p>
+            <ul>
+                <li>GPA: 3.8/5.0</li>
+                <li>金融统计与风险管理实验班</li>
+                <li>主要课程：计算机编程语言（Python）、应用多元统计、应用时间序列、随机过程、统计软件算法（R）、计量经济学</li>
+            </ul>
         </section>
-
-        <section id="experience" class="section">
-            <h2>工作经历</h2>
-            <p>公司：数据洞察科技有限公司</p>
-            <p>职位：资深数据分析师</p>
-            <p>描述：在这家公司，我负责大数据分析和模式识别的工作，帮助企业从海量数据中提取有价值的信息。</p>
+        <section class="section" id="experience">
+            <h2>实习工作经历</h2>
+            <div>
+                <h3>上海念空科技数据技术中心（有限合伙），量化研究实习生，量化策略部</h3>
+                <p>2022年6月 - 2022年11月</p>
+                <ul>
+                    <li>处理和分析期货高频数据，协助模型数据准备。</li>
+                    <li>进行因子挖掘和测试，提交的因子有效提高了公司基准模型在测试集中的平均阿尔法收益10%，最高增幅达21.43%。</li>
+                </ul>
+            </div>
+            <div>
+                <h3>上海通怡投资管理有限公司，量化研究实习生，量化投资部</h3>
+                <p>2022年1月 - 2022年5月</p>
+                <ul>
+                    <li>协助量化研究员进行量化策略研究及相关数据的处理和分析。</li>
+                    <li>通过因子回测再现研究报告策略，使用机器学习算法挖掘因子，构建因子选股策略模型。</li>
+                </ul>
+            </div>
+            <div>
+                <h3>国金证券股份有限公司上海投资咨询分公司，数据分析实习生，研究创新数据中心</h3>
+                <p>2021年10月 - 2021年12月</p>
+                <ul>
+                    <li>使用MySQL数据库进行数据需求分析、数据清洗和挖掘。</li>
+                    <li>使用线性回归树模型等机器学习模型分析项目研究行业情况。</li>
+                </ul>
+            </div>
         </section>
-
-        <section id="skills" class="section">
-            <h2>技能专长</h2>
-            <p>1. 数据分析和统计建模</p>
-            <p>2. 机器学习算法的实现和优化</p>
-            <p>3. 深度学习框架的应用，如TensorFlow和PyTorch</p>
+        <section class="section" id="projects">
+            <h2>项目经验</h2>
+            <p><strong>全国大学生数学建模竞赛</strong> - 省一等奖（前10%）</p>
+            <ul>
+                <li>研究机场出租车司机载客决策问题：排队等候乘客 - 承担时间成本，空载回城 - 承担无载成本和潜在乘客利益。</li>
+                <li>使用Python::Selenium工具爬取浦东机场到达航班号和客流数据，构建依赖到达率状态的Erlang排队模型，获取出租车司机的最优决策。</li>
+            </ul>
         </section>
-
-        <section id="contact" class="section">
-            <h2>联系方式</h2>
-            <p>邮箱：example@email.com</p>
-            <p>电话：+86 123 456 7890</p>
-            <p>LinkedIn：linkedin.com/in/yourprofile</p>
+        <section class="section" id="skills">
+            <h2>技能和证书</h2>
+            <ul>
+                <li>技能：Python、R</li>
+                <li>证书：证券从业资格证</li>
+            </ul>
+        </section>
+        <section class="section" id="languages">
+            <h2>语言能力</h2>
+            <ul>
+                <li>英语CET-6：549</li>
+            </ul>
         </section>
     </div>
 
     <script>
-        // 现在这个函数仅用于展示被点击的部分
-        function showSection(sectionId) {
-            // 隐藏所有除了关于我之外的sections
-            var sections = document.querySelectorAll('.section:not(#about)');
-            sections.forEach(function (section) {
-                section.style.display = 'none';
-            });
-
-            // 显示请求的section，除非它是关于我
-            if (sectionId !== 'about') {
-                var activeSection = document.getElementById(sectionId);
-                activeSection.style.display = 'block';
-            }
-        }
-
-        // 用于初始化页面，确保所有链接都绑定了正确的事件
+        // 当点击导航链接时显示对应的板块
+        // JavaScript代码
         document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', function () {
+            link.addEventListener('click', function (event) {
+                event.preventDefault(); // 阻止链接的默认行为
+
                 var sectionId = this.getAttribute('href').slice(1);
-                showSection(sectionId);
+                var section = document.getElementById(sectionId);
+
+                // 隐藏所有section
+                document.querySelectorAll('.section').forEach(sec => {
+                    if (sec.id !== "about") { // 不隐藏“关于我”板块
+                        sec.style.display = 'none'; // 隐藏非活动板块
+                        sec.classList.remove('active');
+                    }
+                });
+
+                // 如果点击的是“关于我”板块，则确保它是显示的
+                if (sectionId === "about" || !document.getElementById('about').classList.contains('active')) {
+                    document.getElementById('about').style.display = 'block';
+                    document.getElementById('about').classList.add('active');
+                }
+
+                // 显示点击的section，如果不是“关于我”
+                if (sectionId !== "about") {
+                    section.style.display = 'block';
+                    // 使用setTimeout来确保display:block先应用，然后opacity过渡才能生效
+                    setTimeout(() => {
+                        section.classList.add('active');
+                    }, 0);
+                }
             });
         });
-        // Select the 'about' section on initial load
-        showSection('about');
+
+        // 初始化时显示“关于我”板块
+        document.getElementById('about').style.display = 'block';
+        document.getElementById('about').classList.add('active');
+
     </script>
 
 </body>
